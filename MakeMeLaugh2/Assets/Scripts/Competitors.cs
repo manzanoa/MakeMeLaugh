@@ -15,6 +15,8 @@ public class Competitors : MonoBehaviour
 
     private Joke lastJoke;
 
+    private bool laughed = false;
+
     public string getName()
     {
         return nametag;
@@ -33,6 +35,12 @@ public class Competitors : MonoBehaviour
 
     public void takeMFDamage(int damage)
     {
+        this.mentalFortitude -= damage;
+        mentalFortitude = Mathf.Clamp(mentalFortitude, 0, maxMentalFortitude);
 
+        if(mentalFortitude > 0)
+        {
+
+        }
     }
 }
