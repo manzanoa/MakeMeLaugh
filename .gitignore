@@ -2,17 +2,17 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
 #
-/[Ll]ibrary/
-/[Tt]emp/
-/[Oo]bj/
-/[Bb]uild/
-/[Bb]uilds/
-/[Ll]ogs/
-/[Uu]ser[Ss]ettings/
+MakeMeLaugh2/[Ll]ibrary/
+MakeMeLaugh2/[Tt]emp/
+MakeMeLaugh2/[Oo]bj/
+MakeMeLaugh2/[Bb]uild/
+MakeMeLaugh2/[Bb]uilds/
+MakeMeLaugh2/[Ll]ogs/
+MakeMeLaugh2/[Uu]ser[Ss]ettings/
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
-/[Mm]emoryCaptures/
+MakeMeLaugh2/[Mm]emoryCaptures/
 
 # Recordings can get excessive in size
 /[Rr]ecordings/
@@ -70,4 +70,3 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
-MakeMeLaugh2/Library/Artifacts/00/000449251c964c0170e8be3f595afe46
