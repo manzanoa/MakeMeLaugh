@@ -19,13 +19,19 @@ public class Competitors : MonoBehaviour
     protected JokeManager.JokeType specialty;
 
     [SerializeField]
-    protected List<Joke> jokeList;
+    protected List<int> jokeListInt = new List<int>();
+
+    [SerializeField]
+    protected List<Joke> jokeList = new List<Joke>();
 
     protected bool laughed = false;
     protected bool guarding = false;
 
     [SerializeField]
     protected Joke prevJoke;
+
+    [SerializeField]
+    private JokeManager jm;
 
     public string getName()
     {
@@ -43,31 +49,37 @@ public class Competitors : MonoBehaviour
         mentalFortitude = mf;
     }
 
-    public void takeMFDamage(Joke joke, Joke prevJoke, JokeManager.JokeType sp)
+    public void takeMFDamage(Joke joke, Joke pJoke, JokeManager.JokeType sp)
     {
         int damage = 0;
 
         //determines the value for the joke type
         if(joke.type == weakness)
         {
+            Debug.Log("X2");
             damage = (joke.mentalDamage * 2);
         }
         else if(joke.type == this.notFunny)
         {
+            Debug.Log("/2");
             damage = joke.mentalDamage / 2;
         }
         else
         {
+
+            Debug.Log("X1");
             damage = joke.mentalDamage;
         }
 
         if(joke.type == sp)
         {
+            Debug.Log("X2");
             damage *= 2;
         }
 
-        if(joke == prevJoke || joke == getPrevJoke())
+        if(joke == pJoke || joke == this.getPrevJoke())
         {
+            Debug.Log("/2");
             damage /= 2;
         }
 
@@ -100,6 +112,11 @@ public class Competitors : MonoBehaviour
     public void Guard()
     {
         guarding = true;
+    }
+
+    public void NotGuarding()
+    {
+        guarding = false;
     }
 
     public bool getGuarding()
@@ -139,17 +156,43 @@ public class Competitors : MonoBehaviour
 
     public void setPrevJoke(Joke joke)
     {
-        prevJoke = joke;
+        this.prevJoke = joke;
     }
 
     public Joke getPrevJoke()
     {
-        return prevJoke;
+        return this.prevJoke;
     }
 
     public bool getLaughed()
     {
         return laughed;
+    }
+
+    public List<Joke> getJokeDeck()
+    {
+        foreach (int i in jokeListInt)
+        {
+            jokeList.Add(jm.jokeList[i]);
+        }
+
+        Shuffle();
+        
+        return jokeList;
+    }
+
+    public void Shuffle()
+    {
+        int count = jokeList.Count;
+        int last = count - 1;
+
+        for (int i = 0; i < last; ++i)
+        {
+            int r = Random.Range(i, count);
+            Joke tmp = jokeList[i];
+            jokeList[i] = jokeList[r];
+            jokeList[r] = tmp;
+        }
     }
 
 
