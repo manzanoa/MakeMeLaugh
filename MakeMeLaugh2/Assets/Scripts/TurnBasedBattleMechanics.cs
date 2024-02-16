@@ -47,11 +47,15 @@ public class TurnBasedBattleMechanics : MonoBehaviour
     [SerializeField]
     private Sprite neutral, laughing, half, tell, serious;
 
+    public Sprite[] gothSprites, clownSprites, fbiSprites;
+
+    private int round = 1;
+
     private void Start()
     {
-        StartBattle(opponent);
+        //StartBattle(opponent);
     }
-    private void StartBattle(Competitors opponent)
+    public void StartBattle(Competitors opponent)
     {
         this.opponent = opponent;
         pJokeList = player.getJokeDeck();
@@ -70,12 +74,15 @@ public class TurnBasedBattleMechanics : MonoBehaviour
             oJokeHand[i].mentalDamage = oJokeList[i].mentalDamage;
         }
 
+        textBoxName.text = "";
+        textBox.text = "Match " + round.ToString() + "!";
+        textBoxGO.SetActive(true);
+
         int first = Random.Range(0, 2);
         if(first == 0)
         {
-            textBoxName.text = "";
-            textBox.text = player.getName() + " will start first!";
-            textBoxGO.SetActive(true);
+            
+            
 
             
             StartCoroutine(PlayerTurn());
@@ -95,6 +102,11 @@ public class TurnBasedBattleMechanics : MonoBehaviour
     {
         gothGirl.sprite = neutral;
         yield return new WaitForSeconds(5f);
+        textBoxName.text = "";
+        textBox.text = player.getName() + " will start first!";
+
+        yield return new WaitForSeconds(5f);
+
         textBoxGO.SetActive(false);
         choiceMade = false;
         player.NotGuarding();
@@ -237,6 +249,8 @@ public class TurnBasedBattleMechanics : MonoBehaviour
 
     IEnumerator EnemyTurn()
     {
+        yield return new WaitForSeconds(5f);
+
         textBoxGO.SetActive(false);
         gothGirl.sprite = neutral;
 
