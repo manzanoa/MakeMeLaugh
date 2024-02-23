@@ -47,6 +47,7 @@ public class TurnBasedBattleMechanics : MonoBehaviour
     [SerializeField]
     private Sprite neutral, laughing, half, tell, serious;
 
+<<<<<<< Updated upstream
     public Sprite[] gothSprites, clownSprites, fbiSprites;
 
     private int round = 1;
@@ -56,7 +57,209 @@ public class TurnBasedBattleMechanics : MonoBehaviour
         //StartBattle(opponent);
     }
     public void StartBattle(Competitors opponent)
+=======
+    [SerializeField]
+    private Text introText;
+
+    [SerializeField]
+    private Button darkButton, grossButton, punButton;
+
+    [SerializeField]
+    private GameObject introGO;
+
+    private int settingsettings = 0;
+
+    private void Start()
     {
+        darkButton.gameObject.SetActive(false);
+        grossButton.gameObject.SetActive(false);
+        punButton.gameObject.SetActive(false);
+        //StartBattle(opponent);
+        StartCoroutine(Intro());
+    }
+
+    private IEnumerator Intro()
+    {
+        string s = "Welcome to Make Me Laugh!";
+        foreach(char c in s)
+        {
+            introText.text = introText.text + c;
+            yield return new WaitForSeconds(.1f);
+        }
+        yield return new WaitForSeconds(.5f);
+
+        introText.text = "";
+        s = "In this game, you and your opponent will go one on one telling jokes to make the other laugh.";
+        foreach (char c in s)
+        {
+            introText.text = introText.text + c;
+            yield return new WaitForSeconds(.1f);
+        }
+
+        yield return new WaitForSeconds(.5f);
+
+        introText.text = "";
+        s = "Know that some people enjoy certain types of jokes while others don't find them funny.";
+        foreach (char c in s)
+        {
+            introText.text = introText.text + c;
+            yield return new WaitForSeconds(.1f);
+        }
+
+        yield return new WaitForSeconds(.5f);
+
+        introText.text = "";
+        s = "Learn your opponents, and hit them right in their funny bone!";
+        foreach (char c in s)
+        {
+            introText.text = introText.text + c;
+            yield return new WaitForSeconds(.1f);
+        }
+
+        yield return new WaitForSeconds(.5f);
+
+        introText.text = "";
+        s = "But before we start, we will need you to answer some questions for us.";
+        foreach (char c in s)
+        {
+            introText.text = introText.text + c;
+            yield return new WaitForSeconds(.1f);
+        }
+
+        introText.text = "";
+        s = "First, out of the three what is your favorite type of joke?";
+        foreach (char c in s)
+        {
+            introText.text = introText.text + c;
+            yield return new WaitForSeconds(.1f);
+        }
+
+        darkButton.gameObject.SetActive(true);
+        grossButton.gameObject.SetActive(true);
+        punButton.gameObject.SetActive(true);
+
+    }
+
+    public void ChooseSettings(string weakness)
+    {
+        if(settingsettings == 0)
+        {
+            if (weakness == "Dark")
+            {
+                player.setWeakness(JokeManager.JokeType.dark);
+                darkButton.gameObject.SetActive(false);
+            }
+            else if (weakness == "Dirty")
+            {
+                player.setWeakness(JokeManager.JokeType.gross);
+                grossButton.gameObject.SetActive(false);
+            }
+            else if (weakness == "Pun")
+            {
+                player.setWeakness(JokeManager.JokeType.pun);
+                punButton.gameObject.SetActive(false);
+            }
+            settingsettings = 1;
+            StartCoroutine(ChooseNotFunny());
+        }
+        else if(settingsettings == 1)
+        {
+            if (weakness == "Dark")
+            {
+                player.setNotFunny(JokeManager.JokeType.dark);
+            }
+            else if (weakness == "Dirty")
+            {
+                player.setNotFunny(JokeManager.JokeType.gross);
+            }
+            else if (weakness == "Pun")
+            {
+                player.setNotFunny(JokeManager.JokeType.pun);
+            }
+            darkButton.gameObject.SetActive(true);
+            grossButton.gameObject.SetActive(true);
+            punButton.gameObject.SetActive(true);
+            settingsettings = 2;
+            StartCoroutine(ChooseSpecialty());
+
+        }
+        else if(settingsettings == 2)
+        {
+            if (weakness == "Dark")
+            {
+                player.setSpecialty(JokeManager.JokeType.dark);
+            }
+            else if (weakness == "Dirty")
+            {
+                player.setSpecialty(JokeManager.JokeType.gross);
+            }
+            else if (weakness == "Pun")
+            {
+                player.setSpecialty(JokeManager.JokeType.pun);
+            }
+            darkButton.gameObject.SetActive(false);
+            grossButton.gameObject.SetActive(false);
+            punButton.gameObject.SetActive(false);
+            settingsettings = 3;
+            StartCoroutine(EndOfIntro());
+        }
+    }
+
+    private IEnumerator EndOfIntro()
+    {
+        introText.text = "";
+        string s = "Thank you! And with that the questions are over!";
+        foreach (char c in s)
+        {
+            introText.text = introText.text + c;
+            yield return new WaitForSeconds(.1f);
+        }
+        yield return new WaitForSeconds(.5f);
+
+        introText.text = "";
+        s = "It is now time to begin the game. Make people laugh before they make you laugh.";
+        foreach (char c in s)
+        {
+            introText.text = introText.text + c;
+            yield return new WaitForSeconds(.1f);
+        }
+        yield return new WaitForSeconds(.5f);
+
+        s = "Good luck!";
+        foreach (char c in s)
+        {
+            introText.text = introText.text + c;
+            yield return new WaitForSeconds(.1f);
+        }
+        yield return new WaitForSeconds(.1f);
+
+        StartBattle(opponent);
+    }
+    private IEnumerator ChooseNotFunny()
+    {
+        introText.text = "";
+        string s = "What is you least favorite type of joke?";
+        foreach (char c in s)
+        {
+            introText.text = introText.text + c;
+            yield return new WaitForSeconds(.1f);
+        }
+    }
+
+    private IEnumerator ChooseSpecialty()
+    {
+        introText.text = "";
+        string s = "What type of jokes are your specialty?";
+        foreach (char c in s)
+        {
+            introText.text = introText.text + c;
+            yield return new WaitForSeconds(.1f);
+        }
+    }
+    private void StartBattle(Competitors opponent)
+>>>>>>> Stashed changes
+    {
+        introGO.SetActive(false);
         this.opponent = opponent;
         pJokeList = player.getJokeDeck();
         oJokeList = opponent.getJokeDeck();
@@ -110,6 +313,13 @@ public class TurnBasedBattleMechanics : MonoBehaviour
         textBoxGO.SetActive(false);
         choiceMade = false;
         player.NotGuarding();
+        for (int i = 0; i < 5; i++)
+        {
+            pJokeHand[i] = pJokeList[i];
+            /*pJokeHand[i].type = pJokeList[i].type;
+            pJokeHand[i].mentalDamage = pJokeList[i].mentalDamage;*/
+            playerJokeCards[i].text = pJokeList[i].joke;
+        }
 
         //do stuff
         jokeMenu1.SetActive(true);
@@ -232,7 +442,15 @@ public class TurnBasedBattleMechanics : MonoBehaviour
     {
         player.Guard();
         choiceMade = true;
+        player.Shuffle();
         jokeMenu2.SetActive(false);
+        for (int i = 0; i < 5; i++)
+        {
+            pJokeHand[i].joke = pJokeList[i].joke;
+            pJokeHand[i].type = pJokeList[i].type;
+            pJokeHand[i].mentalDamage = pJokeList[i].mentalDamage;
+            playerJokeCards[i].text = pJokeHand[i].joke;
+        }
         textBoxGO.SetActive(true);
     }
 
